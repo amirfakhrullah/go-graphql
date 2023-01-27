@@ -6,6 +6,7 @@ package graph
 
 import (
 	"context"
+	"strings"
 
 	"github.com/amirfakhrullah/go-graphql/database"
 	"github.com/amirfakhrullah/go-graphql/graph/customTypes"
@@ -16,6 +17,7 @@ import (
 func (r *mutationResolver) CreateTodo(ctx context.Context, text string) (*customTypes.Todo, error) {
 	context := database.GetContext(ctx)
 	todo := &customTypes.Todo{
+		ID: strings.Join(strings.Split(text, " "), "-"),
 		Text: text,
 		Done: false,
 	}
